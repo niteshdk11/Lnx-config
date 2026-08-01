@@ -42,3 +42,17 @@ npm i -g nodemon
 
 # Clean up temporary folder
 rm -rf temp_folder
+
+---
+
+### setting this as root as lychee always
+
+```jsx
+cat > /etc/wsl.conf <<EOF
+[user]
+default=lychee
+EOF
+```
+
+sudo apt update
+sudo apt upgrade -y
