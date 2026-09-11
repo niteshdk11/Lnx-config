@@ -8,7 +8,7 @@ This guide sets up a fuzzy search GitHub clone tool using the GitHub CLI (`gh`),
 ## 🔧 Dependencies (Install via [Homebrew](https://brew.sh))
 
 ```bash
-brew install gh fzf jq git
+sudo apt install -y git gh fzf
 ````
 
 > ❗ You must also be logged in to GitHub with `gh`:
