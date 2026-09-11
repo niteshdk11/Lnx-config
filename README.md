@@ -1,58 +1,51 @@
 # Setup Script
 
 ## Description
-This script automates the setup process by updating the system, installing essential packages, setting up Oh My Zsh, Homebrew, and installing useful utilities and development tools.
+
+This script automates the setup process by updating the system, installing essential packages, setting up Oh My Zsh, and installing useful utilities and development tools.
 
 ---
+
 ## Script
+
 ```bash
 #!/bin/bash
-
 # Update and upgrade packages
 sudo apt update && sudo apt upgrade -y
 
 # Install essential packages
-sudo apt install -y build-essential curl git zsh
+sudo apt install -y build-essential curl git zsh fzf fd-find bat eza zoxide micro gh dnsutils python3 nodejs npm
 
 # Install Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Set Zsh as default shell
+chsh -s "$(which zsh)"
 
-# Configure Homebrew in Zsh
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Install GCC with Homebrew
-brew install gcc
-
-# Clone configuration repo and clean up Git directory
+# Clone configuration repo
 git clone https://github.com/nitesh11-dk/Lnx-config.git temp_folder
-rm -rf temp_folder/.git
 
-# Set executable permissions for custom script
-chmod +x ~/.run_with_clear.sh
+# Copy Zsh configuration
+cp temp_folder/.zshrc ~/.zshrc
 
-# Install additional utilities with Homebrew
-brew install yazi micro node fzf fd bat git-delta eza tldr zoxide java
+# Copy custom scripts
+mkdir -p ~/.scripts
+cp -r temp_folder/.scripts/. ~/.scripts/
 
-# Install Nodemon globally with npm
-npm i -g nodemon
+# Copy Git configuration
+cp temp_folder/.gitconfig ~/.gitconfig
+
+# Set executable permissions for custom scripts
+chmod +x ~/.scripts/*.sh 2>/dev/null || true
 
 # Clean up temporary folder
 rm -rf temp_folder
 
----
-
-### setting this as root as lychee always
-
-```jsx
-cat > /etc/wsl.conf <<EOF
+# Set default WSL user to lychee
+sudo tee /etc/wsl.conf > /dev/null <<EOF
 [user]
 default=lychee
 EOF
-```
-
-sudo apt update
-sudo apt upgrade -y
