@@ -14,7 +14,7 @@ This script automates the setup process by updating the system, installing essen
 sudo apt update && sudo apt upgrade -y
 
 # Install essential packages
-sudo apt install -y build-essential curl git zsh fzf fd-find bat eza zoxide micro gh dnsutils python3 nodejs npm
+sudo apt install -y build-essential curl git zsh fzf fd-find bat eza zoxide micro gh dnsutils python3 nodejs npm yazi
 
 # Install Oh My Zsh
 RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
