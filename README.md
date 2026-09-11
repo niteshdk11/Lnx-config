@@ -26,7 +26,7 @@ chsh -s "$(which zsh)"
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Clone configuration repo
-git clone https://github.com/nitesh11-dk/Lnx-config.git temp_folder
+git clone https://github.com/niteshdk11/Lnx-config.git temp_folder
 
 # Copy Zsh configuration
 cp temp_folder/.zshrc ~/.zshrc
