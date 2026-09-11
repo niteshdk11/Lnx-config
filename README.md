@@ -1,15 +1,5 @@
-# Setup Script
-
-## Description
-
-This script automates the setup process by updating the system, installing essential packages, setting up Oh My Zsh, and installing useful utilities and development tools.
-
----
-
-## Script
-
-```bash
 #!/bin/bash
+
 # Update and upgrade packages
 sudo apt update && sudo apt upgrade -y
 
@@ -21,9 +11,6 @@ RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/
 
 # Set Zsh as default shell
 chsh -s "$(which zsh)"
-
-# Install uv
-curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Clone configuration repo
 git clone https://github.com/niteshdk11/Lnx-config.git temp_folder
@@ -41,11 +28,22 @@ cp temp_folder/.gitconfig ~/.gitconfig
 # Set executable permissions for custom scripts
 chmod +x ~/.scripts/*.sh 2>/dev/null || true
 
+# Install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
 # Clean up temporary folder
 rm -rf temp_folder
 
-# Set default WSL user to lychee
+# Set default WSL user to nitesh
 sudo tee /etc/wsl.conf > /dev/null <<EOF
 [user]
-default=lychee
+default=nitesh
 EOF
+
+# Optional: Remove old Bash/Zsh history and cache
+rm -f ~/.bash_logout
+rm -f ~/.bashrc
+rm -f ~/.bash_history
+rm -f ~/.sudo_as_admin_successful
+rm -f ~/.zcompdump*
+rm -f ~/.zsh_history
